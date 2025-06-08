@@ -17,19 +17,18 @@ A simple command-line based assistant that answers questions based only on your 
 
 Install dependencies:
 
-bash
-Copy code
-pip install langchain langchain-openai python-dotenv
+   ```bash
+   pip install langchain langchain-openai python-dotenv  
+
 Set your OpenAI API key in a .env file:
 
-ini
-Copy code
-OPENAI_API_KEY=your_openai_key_here
+   ```ini
+   OPENAI_API_KEY=your_openai_key_here
+
 Run the assistant:
 
-bash
-Copy code
-python study_buddy_week1.py
+   ```bash
+   python study_buddy_week1.py
 
 🧪 Testing
 We tested the assistant with three types of questions:
