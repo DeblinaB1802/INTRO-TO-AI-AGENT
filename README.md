@@ -71,5 +71,4 @@ A: I can't find the answer in the provided notes.
 
 ---
 
-Let me know if you'd like help writing `my_notes.md` or setting up the GitHub repo.
 
