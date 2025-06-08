@@ -33,19 +33,19 @@ A simple command-line based assistant that answers questions based only on your 
 We tested the assistant with three types of questions:
 
 ### ✅ Clearly Answered
-Q: "What is the need for CNN?"
+Q: What is the need for CNN?
 
-A: "The need for Convolutional Neural Networks (CNNs) arises from the inefficiency and computational complexity of traditional neural networks when dealing with high-dimensional data like images. Images consist of a large number of pixels, leading to overfitting, slow training, and high memory usage in traditional neural networks. CNNs address this challenge by introducing a more efficient architecture that leverages spatial hierarchies in image data, reducing the number of parameters and allowing the network to generalize better."
+A: The need for Convolutional Neural Networks (CNNs) arises from the inefficiency and computational complexity of traditional neural networks when dealing with high-dimensional data like images. Images consist of a large number of pixels, leading to overfitting, slow training, and high memory usage in traditional neural networks. CNNs address this challenge by introducing a more efficient architecture that leverages spatial hierarchies in image data, reducing the number of parameters and allowing the network to generalize better.
 
 ### 🟡 Partially Answered
-Q: "What is residual connections?"
+Q: What is residual connections?
 
-A: "Residual connections are a concept introduced in the ResNet architecture, revolutionizing CNN design. They allow very deep networks to be trained without degradation in performance by creating shortcuts, or skip connections, that bypass one or more layers. This helps in mitigating the vanishing gradient problem and allows for easier training of deep neural networks."
+A: Residual connections are a concept introduced in the ResNet architecture, revolutionizing CNN design. They allow very deep networks to be trained without degradation in performance by creating shortcuts, or skip connections, that bypass one or more layers. This helps in mitigating the vanishing gradient problem and allows for easier training of deep neural networks.
 
 ### ❌ Not Answered in Notes
-Q: "What is NLP in AI?"
+Q: What is NLP in AI?
 
-A: "I can't find the answer in the provided notes."
+A: I can't find the answer in the provided notes.
 
 ## 📂 Files
 **1. study_buddy_week1.py** - Main script.
