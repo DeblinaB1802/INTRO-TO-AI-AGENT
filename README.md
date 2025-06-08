@@ -4,7 +4,19 @@ SEASONS OF CODE, IIT BOMBAY
 # Study Buddy - Week 1 Assignment
 
 ## 🧠 Objective
-A simple command-line based assistant that answers questions based only on your study notes stored in `my_notes.md`.
+The goal of this project is to build a simple question-answering assistant, kind of like a mini AI study buddy. You give it a Markdown file `my_notes.md` with your study notes on any academic topic, and it can answer questions based only on what's written in those notes.
+
+This tool is helpful when you're studying and want quick answers without searching through your notes manually. If the answer to your question isn’t in the notes, the assistant will honestly say, “I cannot find the answer in the provided notes.” That way, you know exactly what your notes cover and what they don’t.
+
+In short, this project helps you:
+
+Practice working with language models (like OpenAI’s GPT).
+
+Learn how to extract answers from documents using AI.
+
+Build a helpful tool that actually supports your own learning process.
+
+It's simple, but powerful — and it’s just the beginning of building smarter, personalized study tools with AI.
 
 ## 🛠️ Setup Instructions
 
@@ -48,13 +60,13 @@ Q: What is NLP in AI?
 A: I can't find the answer in the provided notes.
 
 ## 📂 Files
-**1. study_buddy_week1.py** - Main script.
+**1. `study_buddy_week1.py`** - Main script.
 
-**2. my_notes.md** - Your study notes.
+**2. `my_notes.md`** - Your study notes.
 
-**3. .env** - Contains your OpenAI API key (not committed to GitHub).
+**3. `.env`** - Contains your OpenAI API key (not committed to GitHub).
 
-**4. README.md** - This file.
+**4. `README.md`** - This file.
 
 
 ---
