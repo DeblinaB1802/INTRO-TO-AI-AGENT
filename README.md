@@ -10,11 +10,11 @@ This tool is helpful when you're studying and want quick answers without searchi
 
 In short, this project helps you:
 
-Practice working with language models (like OpenAI’s GPT).
+- Practice working with language models (like OpenAI’s GPT).
 
-Learn how to extract answers from documents using AI.
+- Learn how to extract answers from documents using AI.
 
-Build a helpful tool that actually supports your own learning process.
+- Build a helpful tool that actually supports your own learning process.
 
 It's simple, but powerful — and it’s just the beginning of building smarter, personalized study tools with AI.
 
