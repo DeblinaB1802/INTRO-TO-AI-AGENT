@@ -14,45 +14,47 @@ A simple command-line based assistant that answers questions based only on your 
    ```bash
    python -m venv venv
    source venv/bin/activate   # On Windows: venv\Scripts\activate
-
-Install dependencies:
+3. Install dependencies:
 
    ```bash
-   pip install langchain langchain-openai python-dotenv  
+   pip install langchain langchain-openai python-dotenv
 
-Set your OpenAI API key in a .env file:
+4. Set your OpenAI API key in a .env file:
 
    ```ini
    OPENAI_API_KEY=your_openai_key_here
 
-Run the assistant:
+5. Run the assistant:
 
    ```bash
    python study_buddy_week1.py
 
-🧪 Testing
+## 🧪 Testing
 We tested the assistant with three types of questions:
 
-✅ Clearly Answered
+### ✅ Clearly Answered
 Q: "When was the term Artificial Intelligence coined?"
+
 A: "The term was coined in 1956..."
 
-🟡 Partially Answered
+### 🟡 Partially Answered
 Q: "Who are the top 5 most cited AI researchers?"
+
 A: "I cannot find the answer in the provided notes." (Correct behavior if not mentioned)
 
-❌ Not Answered in Notes
+### ❌ Not Answered in Notes
 Q: "What is quantum computing?"
+
 A: "I cannot find the answer in the provided notes."
 
-📂 Files
-study_buddy_week1.py - Main script.
+## 📂 Files
+**1. study_buddy_week1.py** - Main script.
 
-my_notes.md - Your study notes.
+**2. my_notes.md** - Your study notes.
 
-.env - Contains your OpenAI API key (not committed to GitHub).
+**3. .env** - Contains your OpenAI API key (not committed to GitHub).
 
-README.md - This file.
+**4. README.md** - This file.
 
 
 ---
