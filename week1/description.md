@@ -36,6 +36,12 @@ It's simple, but powerful — and it’s just the beginning of building smarter,
    ```ini
    OPENAI_API_KEY=your_openai_key_here
 
+5. Add Your Study Notes
+
+Place at **1 .md file** into a folder named `week1/`.
+
+---
+
 5. Run the assistant:
 
    ```bash
