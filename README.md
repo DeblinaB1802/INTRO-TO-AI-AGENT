@@ -71,7 +71,6 @@ We tested the assistant with three types of questions:
 week2/
 │
 ├── study_buddy_week1.py       # Main assistant script
-├── requirements.txt           # Python dependencies
 ├── .env                       # API key (excluded from version control)
 ├── my_notes.md                # Your study notes
 └── README.md                  # This file
@@ -133,7 +132,7 @@ OPENAI_API_KEY=your_openai_key_here
 
 ### 5. Add Your Study Notes
 
-Place at least **3 PDF files** into a folder named `notes/` under `week2/`.
+Place at least **3 PDF files** into a folder named `My_Notes/`.
 
 ---
 
@@ -181,7 +180,7 @@ All set! Your Study Buddy is now ready to assist you.
 
 ### Q3. ❌ Not Covered in Notes
 
-**Question**: What is BERT?
+**Question**: What is Quantization?
 
 **Answer**: I can’t find the answer in the provided notes.
 
