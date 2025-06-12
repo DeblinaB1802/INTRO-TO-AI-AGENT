@@ -87,7 +87,7 @@ def retrieve_chunks(question, vectorstore, k=2):
     return retrieved_docs
 
 # Initiate LLM   
-def load_llm(temperature = 0.5, model_name = "gpt-3.5-turbo"):
+def load_llm(temperature = 0.2, model_name = "gpt-3.5-turbo"):
     try:
         llm = ChatOpenAI(temperature=temperature, model=model_name)
         print("Model successfully initialized...")
@@ -113,7 +113,6 @@ def create_prompt(notes, question):
 # Main Function
 def main():
     print("Welcome to Study Buddy — your partner in learning. Let’s explore knowledge together!")
-
     print("\n\nJust a moment! Your Study Buddy is getting everything ready.")
 
     # File path
@@ -146,7 +145,7 @@ def main():
     vectorstore = vector_db(all_chunked_docs, all_metadatas, all_ids, embeddings)
 
     # Step4 : Initiate LLM
-    llm = load_llm(temperature=0.4, model_name="gpt-3.5-turbo")
+    llm = load_llm(temperature=0.2, model_name="gpt-3.5-turbo")
     if not llm:
         return
 
