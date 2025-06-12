@@ -150,9 +150,9 @@ def main():
     if not llm:
         return
 
+    print("\n\nAll set! Your Study Buddy is now ready to assist you.")
+    
     while True:
-        print("\n\nAll set! Your Study Buddy is now ready to assist you.")
-
         # Step5 : Take user question as input
         question = input("\nEnter your question (or type 'exit' to quit):")
         if question.lower() == "exit":
