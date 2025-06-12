@@ -43,14 +43,14 @@ Each folder in this repository (`week1`, `week2`, ..., `week8`) contains my week
 ### ✅ Week 3 – Tools and Memory
 - Integrated tools (e.g., Wikipedia API)
 - Used LangChain memory modules  
-  🔗 [[Folder Link](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week3)](./week3/)
+  🔗 [https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week3](./week3/)
 
 ---
 
 ### ✅ Week 4 – Multi-turn Conversations & Context Awareness
 - Built context-aware bots using LangChain AgentExecutor
 - Enabled multi-turn dialogue with memory  
-  🔗 [[Folder Link](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week4)](./week4/)
+  🔗 [https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week4](./week4/)
 
 ---
 
