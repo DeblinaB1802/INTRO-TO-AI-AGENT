@@ -45,6 +45,36 @@ It's simple, but powerful — and it’s just the beginning of building smarter,
    ```bash
    python study_buddy_week1.py
 
+## 💬 Example Session
+
+```
+Model successfully initialized...
+
+Enter your question (or type 'exit' to quit):What is CNN?
+
+Study Buddy: CNN stands for Convolutional Neural Network.
+
+LLM response time : 1.34 seconds
+
+Enter your question (or type 'exit' to quit):What do you understand by CNN?
+
+Study Buddy: CNN stands for Convolutional Neural Networks. They are a powerful deep learning architecture that revolutionizes the way computers process visual data. CNNs are specifically designed to handle high-dimensional data like images by exploiting spatial hierarchies and local patterns in the data. They consist of convolutional layers, pooling layers, and fully connected layers, each with a specific role in processing visual information. CNNs are widely used in various applications such as image classification, object detection, facial recognition, medical diagnostics, autonomous vehicles, agriculture, retail, and more.
+
+LLM response time : 2.13 seconds
+
+Enter your question (or type 'exit' to quit):What are different CNN architectures?
+
+Study Buddy: 1. LeNet-5
+2. AlexNet
+3. VGGNet
+4. GoogLeNet (Inception)
+5. ResNet
+
+LLM response time : 1.30 seconds
+
+Enter your question (or type 'exit' to quit):exit
+```
+
 ## 🧪 Testing
 We tested the assistant with three types of questions:
 
