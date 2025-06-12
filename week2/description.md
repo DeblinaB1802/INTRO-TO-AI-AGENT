@@ -92,7 +92,7 @@ ____RETRIEVED DOCUMENT DETAILS____
 Source : Machine Learning.pdf
 Page : 4
 Document chunk size : 2758
-Cosine similarity : -0.0547
+Cosine similarity : 0.5547
 Content : 2 Types of Machine Learning
 Machine learning is divided into three primary paradigms: supervised learning,
 unsupervised learning, and reinforcement learning. Each type addresses dis-
@@ -102,7 +102,7 @@ tinct problems an
 Source : Computer Vision.pdf
 Page : 5
 Document chunk size : 3002
-Cosine similarity : -0.1024
+Cosine similarity : 0.4024
 Content : where xis the input image and ˆxis the reconstructed output. Unsupervised learning is valuable
 for pretraining models when labeled data is scarce, enabling transfer learning in CV tasks.
 3.3 Semi-Supe
