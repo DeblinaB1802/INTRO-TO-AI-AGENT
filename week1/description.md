@@ -38,7 +38,7 @@ It's simple, but powerful — and it’s just the beginning of building smarter,
 
 5. Add Your Study Notes
 
-   Place at **1 .md file** into a folder named `week1/`.
+   Place at **1 Markdown file** name `my_notes.md` into a folder named `week1/`.
 
 5. Run the assistant:
 
