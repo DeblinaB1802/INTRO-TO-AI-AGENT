@@ -29,49 +29,49 @@ Each folder in this repository (`week1`, `week2`, ..., `week8`) contains my week
 ### ✅ Week 1 – Foundation
 - Introduction to Generative AI & Prompting
 - ✏️ **Mini-project:** QA bot over Markdown notes  
-  🔗 [https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week1](./week1/)
+  🔗 [Week1](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week1/)
 
 ---
 
 ### ✅ Week 2 – RAG + Vector Databases
 - Built a RAG-based QA system
 - Implemented a vector store for retrieval  
-  🔗 [https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week2](./week2/)
+  🔗 [Week2](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week2/)
 
 ---
 
 ### ✅ Week 3 – Tools and Memory
 - Integrated tools (e.g., Wikipedia API)
 - Used LangChain memory modules  
-  🔗 [https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week3](./week3/)
+  🔗 [Week3](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week3/)
 
 ---
 
 ### ✅ Week 4 – Multi-turn Conversations & Context Awareness
 - Built context-aware bots using LangChain AgentExecutor
 - Enabled multi-turn dialogue with memory  
-  🔗 [https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week4](./week4/)
+  🔗 [Week4](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week4/)
 
 ---
 
 ### ✅ Week 5 – Agent Design Patterns and Autonomy
 - Explored tool-using vs planning agents
 - Created autonomous feedback loops  
-  🔗 [https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week5](./week5/)
+  🔗 [Week5](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week5/)
 
 ---
 
 ### ✅ Week 6 – Evaluation and Guardrails
 - Implemented basic evaluation, error logging
 - Addressed safety, ethics, and responsible AI  
-  🔗 [https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week6](./week6/)
+  🔗 [Week6](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week6/)
 
 ---
 
 ### ✅ Week 7 – Personalization and UI
 - Personalized responses using user profiling
 - Built a Streamlit/Gradio UI for the chatbot  
-  🔗 [https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week7](./week7/)
+  🔗 [Week7](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week7/)
 
 ---
 
@@ -82,7 +82,7 @@ Each folder in this repository (`week1`, `week2`, ..., `week8`) contains my week
   - Tool usage
   - Feedback & guardrails
   - UI with hosting  
-  🔗 [https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week8](./week8/)
+  🔗 [Week8](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week8/)
 
 ---
 
