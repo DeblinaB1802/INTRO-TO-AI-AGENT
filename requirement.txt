@@ -1,0 +1,12 @@
+langchain_openai
+langchain
+dotenv
+sentence_transformers
+sklearn
+numpy
+uuid
+chromadb
+os
+time
+PyPDF2
+pathlib
