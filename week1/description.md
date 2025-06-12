@@ -68,7 +68,7 @@ We tested the assistant with three types of questions:
 ## 📂 Project Structure
 
 ```
-week2/
+week1/
 │
 ├── study_buddy_week1.py       # Main assistant script
 ├── .env                       # API key (excluded from version control)
