@@ -1,7 +1,7 @@
 # INTRO-TO-AI-AGENT
 SEASONS OF CODE, IIT BOMBAY
 
-# Study Buddy - Week 1 Assignment
+# 📚 Study Buddy - Week 1 Assignment
 
 ## 🧠 Objective
 The goal of this project is to build a simple question-answering assistant, kind of like a mini AI study buddy. You give it a Markdown file `my_notes.md` with your study notes on any academic topic, and it can answer questions based only on what's written in those notes.
@@ -44,29 +44,39 @@ It's simple, but powerful — and it’s just the beginning of building smarter,
 ## 🧪 Testing
 We tested the assistant with three types of questions:
 
-### ✅ Clearly Answered
-Q: What is the need for CNN?
+### Q1. ✅ Clearly Answered
+**Question**: What is the need for CNN?
 
-A: The need for Convolutional Neural Networks (CNNs) arises from the inefficiency and computational complexity of traditional neural networks when dealing with high-dimensional data like images. Images consist of a large number of pixels, leading to overfitting, slow training, and high memory usage in traditional neural networks. CNNs address this challenge by introducing a more efficient architecture that leverages spatial hierarchies in image data, reducing the number of parameters and allowing the network to generalize better.
+**Answer**: The need for Convolutional Neural Networks (CNNs) arises from the inefficiency and computational complexity of traditional neural networks when dealing with high-dimensional data like images. Images consist of a large number of pixels, leading to overfitting, slow training, and high memory usage in traditional neural networks. CNNs address this challenge by introducing a more efficient architecture that leverages spatial hierarchies in image data, reducing the number of parameters and allowing the network to generalize better.
 
-### 🟡 Partially Answered
-Q: What is residual connections?
+**Demonstrates**: Accurate chunk retrieval and relevant answer generation.
 
-A: Residual connections are a concept introduced in the ResNet architecture, revolutionizing CNN design. They allow very deep networks to be trained without degradation in performance by creating shortcuts, or skip connections, that bypass one or more layers. This helps in mitigating the vanishing gradient problem and allows for easier training of deep neural networks.
+### Q2. 🟡 Partially Answered
+**Question**: What is residual connections?
 
-### ❌ Not Answered in Notes
-Q: What is NLP in AI?
+**Answer**: Residual connections are a concept introduced in the ResNet architecture, revolutionizing CNN design. They allow very deep networks to be trained without degradation in performance by creating shortcuts, or skip connections, that bypass one or more layers. This helps in mitigating the vanishing gradient problem and allows for easier training of deep neural networks.
 
-A: I can't find the answer in the provided notes.
+**Demonstrates**: Some overlap found, but no complete match — answer is limited.
 
-## 📂 Files
-**1. `study_buddy_week1.py`** - Main script.
+### Q3. ❌ Not Answered in Notes
+**Question**: What is NLP in AI?
 
-**2. `my_notes.md`** - Your study notes.
+**Answer**: I can't find the answer in the provided notes.
 
-**3. `.env`** - Contains your OpenAI API key (not committed to GitHub).
+**Demonstrates**: The assistant respects scope and avoids hallucination.
 
-**4. `README.md`** - This file.
+## 📂 Project Structure
+
+```
+week2/
+│
+├── study_buddy_week1.py       # Main assistant script
+├── requirements.txt           # Python dependencies
+├── .env                       # API key (excluded from version control)
+├── my_notes.md                # Your study notes
+└── README.md                  # This file
+```
+
 
 
 # 📚 Study Buddy - Week 2 Assignment
@@ -156,19 +166,25 @@ All set! Your Study Buddy is now ready to assist you.
 ### Q1. ❓ Clearly Answered
 
 **Question**: What are the types of machine learning?
-**Answer**: Supervised, Unsupervised, and Reinforcement Learning are the three main types...
+
+**Answer**: Supervised, Unsupervised, and Reinforcement Learning are the three main types.
+
 **Demonstrates**: Accurate chunk retrieval and relevant answer generation.
 
 ### Q2. 🟡 Partially Answered
 
 **Question**: What is the difference between classification and clustering?
+
 **Answer**: The notes mention both but do not explain the difference clearly.
+
 **Demonstrates**: Some overlap found, but no complete match — answer is limited.
 
 ### Q3. ❌ Not Covered in Notes
 
 **Question**: What is BERT?
+
 **Answer**: I can’t find the answer in the provided notes.
+
 **Demonstrates**: The assistant respects scope and avoids hallucination.
 
 ---
@@ -181,54 +197,11 @@ week2/
 ├── study_buddy_week2.py       # Main RAG assistant script
 ├── requirements.txt           # Python dependencies
 ├── .env                       # API key (excluded from version control)
-├── notes/                     # Folder containing multiple PDF files
+├── My_Notes/                  # Folder containing multiple PDF files
 └── README.md                  # This file
 ```
 
 ---
 
-## 🚀 Assignment 2.2: Alternate Vector Store (ChromaDB)
-
-In this implementation, we replaced FAISS with **ChromaDB**, a flexible, serverless vector database.
-
-### ✅ ChromaDB Functionality:
-
-* Stores vector representations of note chunks.
-* Retrieves top-k similar chunks for a user query.
-* Maintains **chunk-level metadata**: source file name, page number, chunk size, similarity score.
-* Enhances transparency by showing where each answer comes from.
-
----
-
-## 🧪 Challenges Faced
-
-* **PDF Parsing Variability**: Some PDFs had poor formatting or lacked newline markers. Resolved using better chunking logic.
-* **Noisy Chunks**: Very short or empty lines were filtered to avoid meaningless embeddings.
-* **Debugging Retrieval**: Printing retrieved chunks helped verify that answers were grounded in actual content.
-
----
-
-## 🧠 Learnings
-
-* How to integrate document processing, vector search, and LLMs into a cohesive pipeline.
-* Best practices in prompt design for retrieval-augmented generation.
-* The importance of explainability when building AI tools for learning.
-
----
-
-## 📌 Notes
-
-* This version does not hallucinate — it only answers from available content.
-* Retrieval traceability builds trust in the assistant’s answers.
-* Easily extendable to work with `.txt` or `.md` files.
-
----
-
-**Let’s keep building smarter tools together!**
-🧑‍💻 *Made with 💡 by Deblina Biswas · CSRE, IIT Bombay*
-
-
-
----
 
 
