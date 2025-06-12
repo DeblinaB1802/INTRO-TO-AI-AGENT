@@ -108,9 +108,7 @@ for pretraining models when labeled data is scarce, enabling transfer learning i
 3.3 Semi-Supe
 ```
 
----
-
-##  ❓ Test Questions and Outputs
+##  🧪 Test Questions and Outputs
 
 ### Q1. ✅ Clearly Answered
 
