@@ -57,8 +57,6 @@ OPENAI_API_KEY=your_openai_key_here
 
 Place at least **3 PDF files** into a folder named `My_Notes/`.
 
----
-
 ## ▶️ Run the Assistant
 
 ```bash
