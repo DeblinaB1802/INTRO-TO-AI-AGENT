@@ -1,4 +1,5 @@
 from rag import prep_ragdb, retrieve_chunks
+import openai
 import logging
 from ethical_guardrail import check_ethical_compliance
 from chat_history import add_to_history, load_chat_history, get_optimized_context, extract_entities, get_entity_context, summarize_history
@@ -7,6 +8,9 @@ from tools import search_tavily, search_wikipedia
 from reasoning import plan_execute_refine_math, fallback_strategy, self_correct_response, evaluate_confidence
 from call_llm import call_openai
 from prompt_design import embed_domains, build_domain_specific_prompt, get_style_conditioned_prompt
+
+api_key = "your_api_key"
+openai.api_key = api_key
 
 def main():
     print("Welcome to Study Buddy — your partner in learning. Let’s explore knowledge together!")
