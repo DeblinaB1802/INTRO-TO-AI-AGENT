@@ -24,7 +24,8 @@ if not OPENAI_API_KEY:
     raise ValueError("OpenAI API key not found! Please set OPENAI_API_KEY in your .env file.")    
 
 os.environ['OPENAI_API_KEY'] = OPENAI_API_KEY
-tavily_api_key = r""
+tavily_api_key = os.getenv("TAVILY_API_KEY")
+tavily_api_url = os.getenv("TAVILY_API_URL")
 
 # Load pdf files and convert them in small document chunks
 def load_and_chunk_doc(file_path):
@@ -100,15 +101,14 @@ def load_llm(temperature = 0.5, model_name = "gpt-3.5-turbo"):
         print(f"Failed to initiate model: {str(e)}")
         return None
 
-def search_tavily(query, api_key):
-    url = "https://api.tavily.com/search"
+def search_tavily(query):
     payload = {
-        "api_key" : api_key,
+        "api_key" : tavily_api_key,
         "query" : query,
         "search_depth" : "basic",
         "include_result" : True
     }
-    response = requests.post(url, json=payload)
+    response = requests.post(tavily_api_url, json=payload)
     if response.status_code == 200:
         data = response.json()
         return data.get("result", "No result found.")
