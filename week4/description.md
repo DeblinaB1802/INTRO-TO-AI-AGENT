@@ -130,13 +130,13 @@ External knowledge (if needed)
  - `get_style_conditioned_prompt(user_level)` → Adapts tone/complexity based on user level (e.g.,      high_school, postgraduate).
 
 #### 2. User Input Loop
-Prompt:
+Input message:
 ```
 Enter your question (or type 'exit' to quit):
 ```
 #### 3. Ethical Check (Guardrail)
-`check_ethical_compliance(question, query=True)`
-→ If unethical, display a warning and skip processing.
+ - `check_ethical_compliance(question, query=True)`
+   → If unethical, display a warning and skip processing.
 
 #### 4. Context Construction
  - `add_to_history(role="user", content=question)`
@@ -165,21 +165,21 @@ Enter your question (or type 'exit' to quit):
  - Build domain-specific prompt using `build_domain_specific_prompt()`
  - Retry `call_openai()` with new prompt
 
-#### - Query Type: `math`
+####  Query Type: `math`
  - `plan_execute_refine_math()` → Handles multi-step math reasoning
  - No RAG or external search involved
 
-#### - Query Type: `wikipedia`
+####  Query Type: `wikipedia`
  - `search_wikipedia(structured_query)` → Retrieves Wikipedia summary
  - Prompt LLM with the wiki content
  - call_openai() → Generates response
 
-#### - Query Type: `tavily`
+####  Query Type: `tavily`
  - `search_tavily(structured_query)` → Uses Tavily API or similar external tool
  - Prompt LLM with the Tavily response
  - `call_openai()` → Generates response
 
-#### - Query Type: Other (Fallback)
+####  Query Type: Other (Fallback)
  - `fallback_strategy()` → Uses LLM with no external knowledge
  - Prompt is: "Answer using general knowledge..."
 
