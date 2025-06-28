@@ -5,7 +5,9 @@ import logging
 from langchain_community.vectorstores import Chroma
 from langchain_community.document_loaders import PDFPlumberLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from dotenv import load_dotenv
 
+load_dotenv()
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 def load_and_chunk_doc(file_path):
     """load and chunk PDF file. """   
