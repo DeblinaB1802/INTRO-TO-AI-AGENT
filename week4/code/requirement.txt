@@ -1,0 +1,13 @@
+openai
+langchain
+langchain-community
+chromadb
+pdfplumber
+PyPDF2
+sentence-transformers
+torch
+numpy
+tqdm
+transformers
+scikit-learn
+nltk
