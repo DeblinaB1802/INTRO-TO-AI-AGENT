@@ -45,7 +45,7 @@ def main():
         structured_query = structure_query(query=question, context=context)
         
         query_cat = classify_query(structured_query)
-        context = []
+        context = [] # Resetting context to prevent injecting unnecessary information—context has already been used in query restructuring and is no longer needed downstream
 
         query_cat_lower = query_cat.lower()
         if query_cat_lower == "tavily":
