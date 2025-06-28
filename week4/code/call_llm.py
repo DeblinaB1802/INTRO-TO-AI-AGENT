@@ -2,7 +2,9 @@ import requests
 import openai
 import logging
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 API_URL = os.getenv("OPENAI_API_URL")
 API_KEY = os.getenv("OPENAI_API_KEY")
 
