@@ -2,7 +2,7 @@ import json
 from sentence_transformers import SentenceTransformer, util
 from domain_prompts import DOMAIN_PROMPTS
 
-file = r"C:\Users\debli\OneDrive\Desktop\CV_PROJECT\INTRO_TO_AI_AGENTS\week4\domains.json"
+file = r"week4\domains.json"
 model = SentenceTransformer('all-MiniLM-L6-v2')
 
 def get_style_conditioned_prompt(user_level : str ="high_school") -> str:
@@ -53,7 +53,6 @@ def detect_domain(query: str, domain_embeddings: dict, threshold: int = 0.1) -> 
         if similarity > best_score:
             best_score = similarity
             best_domain = domain
-            print(best_score)
     return best_domain if best_score >= threshold else "default"
 
 def build_domain_specific_prompt(query: str, domain_embeddings: dict, context: list[dict], style: str) -> list[dict]:

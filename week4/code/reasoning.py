@@ -87,7 +87,7 @@ def self_correct_response(query, initial_response, context):
     return corrected_response
 
 def fallback_strategy(query, context):
-    # Fallback: General LLM knowledge
+    """Generate a fallback response using general LLM knowledge when primary methods fail."""
     fallback_prompt = f"""
     You are Study Buddy, a peer tutor. The primary method failed. Answer {query} using general knowledge or suggest an alternative approach.
     """
@@ -95,6 +95,7 @@ def fallback_strategy(query, context):
     return call_openai(fallback_messages)
 
 def llm_confidence_score(query: str, response: str, context) -> float:
+    """Use an LLM to rate the response's quality from 0 to 1 based on relevance and accuracy."""
     prompt = f"""Evaluate the response to the following question.
 
         Question: "{query}"
@@ -109,9 +110,11 @@ def llm_confidence_score(query: str, response: str, context) -> float:
         score = min(max(float(score_str), 0.0), 1.0)
         return score
     except:
-        return None
+        return 0.0
+
     
 def heuristic_confidence_score(query: str, response: str) -> dict:
+    """Compute heuristic confidence score using length, keyword overlap, semantic similarity, and error terms."""
     scores = {}
 
     # Heuristic 1: Length score
@@ -141,6 +144,7 @@ def heuristic_confidence_score(query: str, response: str) -> dict:
     return scores
 
 def evaluate_confidence(query: str, response: str, context: list[dict], use_llm: bool = True) -> dict:
+    """Combine heuristic and LLM scores to compute a final confidence score for the response."""
     scores = heuristic_confidence_score(query, response)
     
     if use_llm:

@@ -4,11 +4,21 @@ import spacy
 import tiktoken
 from datetime import datetime
 from call_llm import call_openai
+import nltk
+import pandas as pd
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from datetime import datetime
+
+nltk.download('wordnet')
+nltk.download('stopwords')
+nltk.download('punkt')
 
 # Load the spaCy model
 nlp = spacy.load("en_core_web_sm")
 
-CHAT_HISTORY_FILE = r"C:\Users\debli\OneDrive\Desktop\CV_PROJECT\INTRO_TO_AI_AGENTS\week4\conversation_history.json" 
+CHAT_HISTORY_FILE = r"week4\conversation_history.json" 
 chat_history = []
 entities = {}
 
@@ -38,13 +48,18 @@ def count_token(text: str, model_name: str = "gpt-4") -> int:
     encoding = tiktoken.encoding_for_model(model_name)
     return len(encoding.encode(text))
 
-def get_relevant_history(query: str, max: int = 5) -> list[str]:
+def get_relevant_history(query: str, max: int = 2) -> list[str]:
     """Retrieve relevant history based on keyword matching."""
-    query_words = set(query.lower().split())
+    stemmer = PorterStemmer()
+    stop_words = set(stopwords.words('english'))
+    query_words = word_tokenize(query)
+    filtered_query_words = [stemmer.stem(word) for word in query_words if word.isalpha() and word not in stop_words]
+    
     relevant_msg = []
     for chat in chat_history:
-        msg_words = set(chat.get("content", " ").lower().split())
-        overlap = len(query_words & msg_words)
+        msg_words = word_tokenize(chat.get("content", " "))
+        filtered_msg_words = [stemmer.stem(word) for word in msg_words if word.isalpha() and word not in stop_words]
+        overlap = len(set(filtered_query_words) & set(filtered_msg_words))
         if overlap > 0:
             relevant_msg.append((overlap, chat))
     ranked_msg = sorted(relevant_msg, key=lambda x: x[0], reverse=True)
@@ -56,11 +71,11 @@ def get_relevant_history(query: str, max: int = 5) -> list[str]:
 
 def get_optimized_context(query: str, max_tokens: int) -> list[dict]:
     """Combine recent and relevant history."""
-    if len(chat_history) > 5:
-        recent_msgs = chat_history[-5:]
+    if len(chat_history) > 2:
+        recent_msgs = chat_history[-2:]
     else:
         recent_msgs = chat_history[:]
-    relevant_msgs = get_relevant_history(query, max = 5)
+    relevant_msgs = get_relevant_history(query, max = 2)
     final_msgs = list({msg["content"]: msg for msg in recent_msgs + relevant_msgs}.values())
     total_tokens = 0
     final_history = []

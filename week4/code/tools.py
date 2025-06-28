@@ -1,15 +1,14 @@
 import requests
 import wikipedia
 import logging
+import os
 
-def search_tavily(query: str, api_key: str = "your_tavily_api_key", timeout: int = 10) -> str:
+tavily_api_key = os.getenv("TAVILY_API_KEY ")
+def search_tavily(query: str, api_key: str = tavily_api_key, timeout: int = 10) -> str:
     """
     Perform a search using the Tavily API and return a concise answer.
-    
-    Returns:
-        str: The answer text, or "No answer found." / "Search failed."
     """
-    url = "https://api.tavily.com/search"
+    url = os.getenv("TAVILY_API_URL")
     payload = {
         "api_key": api_key,
         "query": query,

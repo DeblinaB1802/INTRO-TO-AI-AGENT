@@ -6,7 +6,7 @@ from langchain_community.vectorstores import Chroma
 from langchain_community.document_loaders import PDFPlumberLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-os.environ["OPENAI_API_KEY"] = "your_api_key"
+os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 def load_and_chunk_doc(file_path):
     """load and chunk PDF file. """   
     loader = PDFPlumberLoader(file_path)
@@ -51,8 +51,9 @@ def retrieve_chunks(query, vectorstore, k=2) -> str:
         return "No relevant information found in your notes."
     
 def prep_ragdb():
+    """Generate vectordb for all PDFs in NOTES directory."""
     # File path
-    dir_path = r"C:\Users\debli\OneDrive\Desktop\CV_PROJECT\INTRO_TO_AI_AGENTS\notes"
+    dir_path = r"week4\notes"
 
     logging.info("  >> Breaking your notes into smaller, manageable pieces...")
     if os.path.exists(dir_path):

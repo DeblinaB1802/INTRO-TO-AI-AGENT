@@ -1,6 +1,7 @@
 from call_llm import call_openai
 
-def classify_query(query):
+def classify_query(query: str) -> str:
+    """Classify user query into these categories (tavily, wikipedia, math, rag)"""
     prompt = f"""You are a smart assistant that classifies user queries into one of the following tools:
     ["tavily", "wikipedia", "math", "rag"]
 
@@ -16,7 +17,7 @@ def classify_query(query):
 
     Query: What is the square root of 144?
     Answer: math
-
+ 
     Query: Search for the latest cricket scores
     Answer: tavily
 
@@ -46,12 +47,17 @@ def classify_query(query):
     cat = call_openai(messages, model="gpt-4.1-mini")
     return cat
 
-def structure_query(query, context):
+def structure_query(query: str, context: list[dict]) -> str:
+    """Re-structuring user query for better understanding of user intent by LLM"""
     structure_query_prompt = f"""
     You are a query optimization assistant.
     Given a user's original query and the surrounding conversation context, rewrite the query to be more specific, 
     unambiguous, and contextually enriched. The restructured query should preserve the user's intent while incorporating 
-    any relevant details from the context to improve clarity and precision. 
+    any relevant details from the context to improve clarity and precision.
+    Use the chat history only when the current user question is a direct follow-up, clarification, or elaboration request 
+    (e.g., questions that begin with phrases like 'explain more', 'elaborate', 'what about this', 'why is that', etc.) or 
+    has relevance with the context provided.
+    Ignore the context entirely when the user introduces a new topic or question unrelated to previous conversation.
     Given:
     - Query: "{query}"
     - Context: "{context}"
@@ -61,5 +67,3 @@ def structure_query(query, context):
     messages = [{"role": "user", "content": structure_query_prompt}]
     structured_query = call_openai(messages)
     return structured_query
-
-print(classify_query("tell me about machine learning basics?"))

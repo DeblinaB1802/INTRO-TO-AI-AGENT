@@ -1,11 +1,15 @@
 import requests
 import openai
+import logging
+import os
 
-API_URL = "https://api.openai.com/v1/chat/completions"
-API_KEY = "your_api_key"
+API_URL = os.getenv("OPENAI_API_URL")
+API_KEY = os.getenv("OPENAI_API_KEY")
 
 openai.api_key = API_KEY
 def call_openai(messages: list[dict], model: str = "gpt-4.1-mini") -> str:
+
+    messages.insert(1, {"role": "system", "content": "Use previous chat history only when it is relevant to the current question or task. If the current input is self-contained and does not require prior context, then ignore the previous history entirely. Prioritize the user’s latest message and avoid unnecessary references to earlier conversation unless they clearly add value."})
     headers = {
     "Content-Type": "application/json",
     "Authorization": f"Bearer {API_KEY}"}
@@ -14,9 +18,11 @@ def call_openai(messages: list[dict], model: str = "gpt-4.1-mini") -> str:
         "model": model,
         "messages": messages
     }
-    response = requests.post(API_URL, headers=headers, json=payload)
-
-    if response.status_code == 200:
-        return response.json()["choices"][0]["message"]["content"]
-    
-    return f"API error. Status code : {response.status_code}"
+    try:
+        response = requests.post(API_URL, headers=headers, json=payload)
+        result = response.json()["choices"][0]["message"]["content"]
+        return result
+        
+    except Exception as e:
+        logging.error(f"Error occurred while fetching answer from LLM: {str(e)}")
+        return f"Error occurred while fetching answer from LLM: {str(e)}"
