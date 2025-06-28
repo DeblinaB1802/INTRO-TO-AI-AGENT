@@ -157,7 +157,7 @@ Enter your question (or type 'exit' to quit):
       - (anything else → fallback)
 
 ### 🔄 Branching Logic Based on Query Type
-####🔹 Query Type: `rag`
+#### 1. Query Type: `rag`
  - `retrieve_chunks()` → Fetch top-k chunks from vector DB
  - Construct prompt with retrieved notes
  - `call_openai()` → LLM responds based only on notes
@@ -165,21 +165,21 @@ Enter your question (or type 'exit' to quit):
  - Build domain-specific prompt using `build_domain_specific_prompt()`
  - Retry `call_openai()` with new prompt
 
-####🔹 Query Type: `math`
+#### 2. Query Type: `math`
  - `plan_execute_refine_math()` → Handles multi-step math reasoning
  - No RAG or external search involved
 
-####🔹 Query Type: `wikipedia`
+#### 3. Query Type: `wikipedia`
  - `search_wikipedia(structured_query)` → Retrieves Wikipedia summary
  - Prompt LLM with the wiki content
  - call_openai() → Generates response
 
-####🔹 Query Type: `tavily`
+#### 4. Query Type: `tavily`
  - `search_tavily(structured_query)` → Uses Tavily API or similar external tool
  - Prompt LLM with the Tavily response
  - `call_openai()` → Generates response
 
-####🔹 Query Type: Other (Fallback)
+#### 5. Query Type: Other (Fallback)
  - `fallback_strategy()` → Uses LLM with no external knowledge
  - Prompt is: "Answer using general knowledge..."
 
