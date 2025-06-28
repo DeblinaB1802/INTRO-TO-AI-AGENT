@@ -1,7 +1,7 @@
 
-# 🧠 Study Buddy — An Interactive Retrieval-Augmented AI Agent
+# 🧠 Study Buddy Week 4 — An Interactive RAG + AI Agent
 
-**Study Buddy** is a Retrieval-Augmented Generation (RAG)-based AI assistant designed to help students engage with their study material intelligently. Instead of generating answers from scratch, it smartly searches your notes and delivers relevant, context-rich answers based on what *you’ve already studied*.
+**Week 4 Study Buddy** is a Retrieval-Augmented Generation (RAG)-based AI assistant designed to help students engage with their study material intelligently. Instead of generating answers from scratch, it smartly searches your notes and delivers relevant, context-rich answers based on what *you’ve already studied*.
 
 This repository is part of a broader AI Agents initiative, focusing on **RAG pipelines, prompt engineering, fallback mechanisms, and confidence-aware LLM responses**.
 
