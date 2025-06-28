@@ -119,6 +119,114 @@ Then you'll receive a curated, AI-generated response based on:
 Your personal notes
 External knowledge (if needed)
 
+---
+
+## 🧭 Study Buddy — Full Execution Flow
+### 🔁 Step-by-step Workflow
+#### 1. Startup & Initialization
+ - `prep_ragdb()` → Loads PDF notes, chunks them, creates embeddings, stores them in Chroma.
+ - `embed_domains()` → Embeds domain-specific labels (used if RAG fallback is needed).
+ - `load_chat_history()` → Loads prior interactions for context continuity.
+ - `get_style_conditioned_prompt(user_level)` → Adapts tone/complexity based on user level (e.g.,      high_school, postgraduate).
+
+#### 2. User Input Loop
+Prompt:
+```
+Enter your question (or type 'exit' to quit):
+```
+#### 3. Ethical Check (Guardrail)
+`check_ethical_compliance(question, query=True)`
+→ If unethical, display a warning and skip processing.
+
+#### 4. Context Construction
+ - `add_to_history(role="user", content=question)`
+ - `extract_entities(question)`
+
+ - `get_optimized_context(question, max_tokens=2000)`
+ - → Uses past chat to build context.
+
+ - If empty, uses `summarize_history()` as a fallback.
+
+#### 5. Query Structuring & Classification
+ - `structure_query()` → Adds context to rephrase/refine user query.
+ - `classify_query()` → Categorizes query into one of:
+      - `"rag"`
+      - `"math"`
+      - `"wikipedia"`
+      - `"tavily"`
+      - (anything else → fallback)
+
+### 🔄 Branching Logic Based on Query Type
+####🔹 Query Type: `rag`
+ - `retrieve_chunks()` → Fetch top-k chunks from vector DB
+ - Construct prompt with retrieved notes
+ - `call_openai()` → LLM responds based only on notes
+ - If keywords like `error`, `not found`, etc. are detected:
+ - Build domain-specific prompt using `build_domain_specific_prompt()`
+ - Retry `call_openai()` with new prompt
+
+####🔹 Query Type: `math`
+ - `plan_execute_refine_math()` → Handles multi-step math reasoning
+ - No RAG or external search involved
+
+####🔹 Query Type: `wikipedia`
+ - `search_wikipedia(structured_query)` → Retrieves Wikipedia summary
+ - Prompt LLM with the wiki content
+ - call_openai() → Generates response
+
+####🔹 Query Type: `tavily`
+ - `search_tavily(structured_query)` → Uses Tavily API or similar external tool
+ - Prompt LLM with the Tavily response
+ - `call_openai()` → Generates response
+
+####🔹 Query Type: Other (Fallback)
+ - `fallback_strategy()` → Uses LLM with no external knowledge
+ - Prompt is: "Answer using general knowledge..."
+
+### ✅ Post-Answer Evaluation
+#### 6. Confidence Evaluation
+ - `evaluate_confidence(query, response, context, use_llm=True)`
+   → Combines:
+ - Heuristic score (based on length, overlap, semantic sim, error terms)
+ - LLM self-evaluation score
+
+#### 7. Self-Correction Logic
+ - If `final_confidence < 0.7`:
+ - Try `self_correct_response()` with rephrased prompt
+ - Re-evaluate
+ - If still low confidence, use `fallback_strategy()`
+
+#### 8. Logging & History
+ - `add_to_history(role="assistant", content=corrected_answer)`
+ - Re-check ethical safety of LLM response
+ - Display final answer with:
+```
+***ANSWER***
+<final_answer>
+```
+
+---
+
+## 🌐 High-Level Execution Paths
+Here’s a simplified tree-style flow chart for clarity:
+
+```
+Start
+ └── load notes, vectors, chat history
+      └── user input → ethical check
+           └── structure & classify query
+                ├── rag → retrieve_chunks → call LLM
+                │        └── if failed → domain_prompt → call LLM
+                ├── math → plan_execute_refine_math
+                ├── wikipedia → search_wikipedia → call LLM
+                ├── tavily → search_tavily → call LLM
+                └── fallback → call LLM directly
+                      ↓
+           evaluate_confidence
+                └── low? → self-correct → failed → fallback → call LLM directly → save to history + print final answer
+                                   └── succeeded → save to history + print final answer
+```
+
 
 
 
