@@ -8,7 +8,9 @@ from tools import search_tavily, search_wikipedia
 from reasoning import plan_execute_refine_math, fallback_strategy, self_correct_response, evaluate_confidence
 from call_llm import call_openai
 from prompt_design import embed_domains, build_domain_specific_prompt, get_style_conditioned_prompt
+from dotenv import load_dotenv
 
+load_dotenv()
 api_key = os.getenv("OPENAI_API_KEY")
 openai.api_key = api_key
 
