@@ -214,17 +214,18 @@ Here’s a simplified tree-style flow chart for clarity:
 Start
  └── load notes, vectors, chat history
       └── user input → ethical check
-           └── structure & classify query
-                ├── rag → retrieve_chunks → call LLM
-                │        └── if failed → domain_prompt → call LLM
-                ├── math → plan_execute_refine_math
-                ├── wikipedia → search_wikipedia → call LLM
-                ├── tavily → search_tavily → call LLM
-                └── fallback → call LLM directly
-                      ↓
-           evaluate_confidence
-                └── low? → self-correct → failed → fallback → call LLM directly → save to history + print final answer
-                                   └── succeeded → save to history + print final answer
+           └── retrieve optimized relevant chat history
+                       └── structure query with context & classify query
+                                  ├── rag → retrieve_chunks → call LLM
+                                  │        └── if failed → domain_prompt → call LLM
+                                  ├── math → plan_execute_refine_math
+                                  ├── wikipedia → search_wikipedia → call LLM
+                                  ├── tavily → search_tavily → call LLM
+                                  └── fallback → call LLM directly
+                                        ↓
+                             evaluate_confidence
+                                  └── low? → self-correct → failed → fallback → call LLM directly → save to history + print final answer
+                                                     └── succeeded → save to history + print final answer
 ```
 ## Example Session
 ```
