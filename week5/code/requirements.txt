@@ -1,0 +1,105 @@
+# Core Dependencies
+gradio>=4.0.0
+langgraph>=0.0.40
+langchain>=0.1.0
+langchain-core>=0.1.0
+langchain-community>=0.0.20
+langchain-openai>=0.0.5
+
+# AI/ML Libraries
+openai>=1.0.0
+scikit-learn>=1.3.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Vector Database & Embeddings
+chromadb>=0.4.0
+sentence-transformers>=2.2.2
+faiss-cpu>=1.7.4
+
+# PDF Processing
+PyPDF2>=3.0.0
+pdfplumber>=0.9.0
+pymupdf>=1.23.0
+
+# Web Search Tools
+tavily-python>=0.3.0
+wikipedia>=1.4.0
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# Environment & Configuration
+python-dotenv>=1.0.0
+pydantic>=2.0.0
+pyyaml>=6.0
+
+# Database & Storage
+sqlite3
+sqlalchemy>=2.0.0
+
+# Async & Concurrency
+asyncio
+aiohttp>=3.8.0
+httpx>=0.24.0
+
+# Text Processing & NLP
+spacy>=3.6.0
+nltk>=3.8.1
+transformers>=4.30.0
+torch>=2.0.0
+
+# Data Validation & Serialization
+marshmallow>=3.19.0
+jsonschema>=4.17.0
+
+# Logging & Monitoring
+loguru>=0.7.0
+rich>=13.0.0
+
+# Testing (Optional)
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+pytest-mock>=3.11.0
+
+# Development Tools (Optional)  
+black>=23.0.0
+flake8>=6.0.0
+mypy>=1.5.0
+
+# Additional Utility Libraries
+python-dateutil>=2.8.2
+pytz>=2023.3
+tqdm>=4.65.0
+click>=8.1.0
+
+# Optional: Jupyter Notebook Support
+jupyter>=1.0.0
+ipykernel>=6.25.0
+
+# Optional: Advanced ML Features
+plotly>=5.15.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Optional: Enhanced PDF Processing
+camelot-py[cv]>=0.10.1
+tabula-py>=2.7.0
+
+# Optional: Audio Processing (if needed for future features)
+speechrecognition>=3.10.0
+pydub>=0.25.1
+
+# Optional: Image Processing (if needed for future features)
+pillow>=10.0.0
+opencv-python>=4.8.0
+
+# Web Framework Dependencies
+uvicorn>=0.23.0
+fastapi>=0.100.0
+
+# Memory Management & Caching
+redis>=4.6.0
+diskcache>=5.6.0
+
+# Security
+cryptography>=41.0.0
