@@ -23,66 +23,51 @@ The aim was to build a **personalized AI-powered Study Buddy**, capable of:
 Each folder in this repository (`week1`, `week2`, ..., `week8`) contains my weekly progress — including assignments, mini-projects, and notes.
 
 ---
+# Study Buddy Project – Weekly Progress Overview
 
-## 📅 Weekly Progress
-
-### ✅ Week 1 – Foundation
-- Introduction to Generative AI & Prompting
-- ✏️ **Mini-project:** QA bot over Markdown notes  
-  🔗 [Week1](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week1/)
+**Introduction**  
+This repository documents my week-by-week progress on the **Study Buddy Project**, part of the **SOC25 initiative** at IIT Bombay. The goal is to develop an AI-powered Study Buddy chatbot capable of retrieving relevant information, integrating tools, maintaining memory, and reasoning over complex queries. The work follows the 8-week curriculum outlined in the original project plan, with my updates below reflecting progress up to **Week 5**.
 
 ---
 
-### ✅ Week 2 – RAG + Vector Databases
-- Built a RAG-based QA system
-- Implemented a vector store for retrieval  
-  🔗 [Week2](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week2/)
+## Weekly Progress
+
+### **Week 1 – Foundation**
+- Understood the basics of AI agents and the core architecture of a conversational agent.
+- Set up the development environment with Python, LangChain, and necessary libraries.
+- Explored the principles of prompt engineering and basic LLM query handling.
 
 ---
 
-### ✅ Week 3 – Tools and Memory
-- Integrated tools (e.g., Wikipedia API)
-- Used LangChain memory modules  
-  🔗 [Week3](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week3/)
+### **Week 2 – Retrieval-Augmented Generation (RAG) & Vector Databases**
+- Implemented a document ingestion pipeline for course-related notes and materials.
+- Created embeddings using OpenAI’s embedding models and stored them in a FAISS vector database.
+- Integrated the vector database with LangChain to enable semantic retrieval of documents.
+- Tested retrieval with sample queries and verified relevance scores.
 
 ---
 
-### ✅ Week 4 – Multi-turn Conversations & Context Awareness
-- Built context-aware bots using LangChain AgentExecutor
-- Enabled multi-turn dialogue with memory  
-  🔗 [Week4](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week4/)
+### **Week 3 – Tools & Memory**
+- Integrated external tools (search, calculation, and document reading) into the agent workflow.
+- Implemented short-term memory for conversational context using LangChain’s `ConversationBufferMemory`.
+- Researched and experimented with long-term memory approaches (vector store-based memory).
+- Improved the agent’s ability to maintain context across multiple turns.
 
 ---
 
-### ✅ Week 5 – Agent Design Patterns and Autonomy
-- Explored tool-using vs planning agents
-- Created autonomous feedback loops  
-  🔗 [Week5](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week5/)
+### **Week 4 – Reasoning & Multi-turn Context-Aware Agents**
+- Studied methods for maintaining context across multiple turns in conversation, including state management, entity tracking, and summarization to handle long inputs.
+- Implemented tool chaining so the agent can execute multiple tools in sequence, handle dependencies, and recover from errors.
+- Applied persona engineering to shape the assistant’s tone, style, and domain specificity while embedding ethical safeguards.
+- Experimented with reasoning frameworks such as Plan-Execute-Refine and self-correction mechanisms to improve decision-making.
 
 ---
 
-### ✅ Week 6 – Evaluation and Guardrails
-- Implemented basic evaluation, error logging
-- Addressed safety, ethics, and responsible AI  
-  🔗 [Week6](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week6/)
-
----
-
-### ✅ Week 7 – Personalization and UI
-- Personalized responses using user profiling
-- Built a Streamlit/Gradio UI for the chatbot  
-  🔗 [Week7](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week7/)
-
----
-
-### 🏁 Week 8 – Final Showcase Project
-- Developed the complete AI Study Buddy agent:
-  - Document QnA via RAG
-  - Multi-turn context memory
-  - Tool usage
-  - Feedback & guardrails
-  - UI with hosting  
-  🔗 [Week8](https://github.com/DeblinaB1802/INTRO-TO-AI-AGENT/tree/main/week8/)
+### **Week 5 – LangGraph Integration & LangChain Transition**
+- Learned the differences between LangChain and LangGraph, noting LangChain’s usefulness for prototyping but limitations in complex, stateful, or multi-agent workflows.
+- Adopted LangGraph for its graph-based architecture, enabling nonlinear workflows, better state retention, and more granular control over agent actions.
+- Explored LangGraph’s strengths in multi-agent orchestration, visual debugging via LangGraph Studio, and production scalability.
+- Began refactoring the Study Buddy’s architecture from linear LangChain pipelines into a modular LangGraph node-based workflow for better maintainability and flexibility.
 
 ---
 
