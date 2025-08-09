@@ -48,10 +48,10 @@ This repository documents my week-by-week progress on the **Study Buddy Project*
 ---
 
 ### **Week 3 – Tools & Memory**
-- Integrated external tools (search, calculation, and document reading) into the agent workflow.
-- Implemented short-term memory for conversational context using LangChain’s `ConversationBufferMemory`.
-- Researched and experimented with long-term memory approaches (vector store-based memory).
-- Improved the agent’s ability to maintain context across multiple turns.
+- Integrated external tools (Tavily for web search, Wikipedia for factual summaries, Calculator for arithmetic) to expand the chatbot’s capabilities beyond local notes.
+- Designed a simple tool selection logic to route queries based on keywords.
+- Implemented short-term conversation memory using a rolling history of the last 10 messages to enable multi-turn context.
+- Combined tools and memory with the Week 2 RAG pipeline, allowing dynamic responses with contextual continuity.
 
 ---
 
