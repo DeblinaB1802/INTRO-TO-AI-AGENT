@@ -74,15 +74,13 @@ This repository documents my week-by-week progress on the **Study Buddy Project*
 ## 📂 Repository Structure
 
 ```
-├── week1/ # Prompt-based Q&A system
-├── week2/ # RAG + vector DB implementation
-├── week3/ # Tool usage + memory system
-├── week4/ # Multi-turn context agent
-├── week5/ # Planning agents and loops
-├── week6/ # Guardrails + evaluation
-├── week7/ # Personalization + UI
-├── week8/ # Final project showcase
-└── README.md # This file
+├── week1/  # Foundation – Basic AI agent setup, prompt engineering, LLM query handling
+├── week2/  # Retrieval-Augmented Generation (RAG) + vector database implementation
+├── week3/  # External tools integration (Tavily, Wikipedia, Calculator) + conversation memory
+├── week4/  # Reasoning & multi-turn context-aware agent (state management, tool chaining, persona engineering)
+├── week5/  # LangGraph integration & LangChain transition for modular, nonlinear workflows
+└── README.md  # Project overview with week-by-week summaries (Weeks 1–5)
+
 ```
 
 ---
