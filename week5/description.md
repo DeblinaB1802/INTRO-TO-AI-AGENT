@@ -37,20 +37,25 @@ It’s designed to be modular, testable, and extendable so you can iterate quick
 
 ```
 week5/
-├── studybuddy.py            # Main agent (LangGraph graphs + CLI entry)
-├── mcptools.py              # Tool implementations (RAG, math, tavily, wiki, planner, etc.)
-├── quizmaster.py            # Quiz generation + interactive quiz runner
-├── memorymanager.py         # Chat history, PDF session notes, vector DB wrapper
+├── main.py                  # Main agent (LangGraph graphs + CLI entry)
 ├── ethicalguardrail.py      # Query/response safety checks
-├── summarizer.py            # session/past summarizer used in graph
+├── memorymanager.py         # Chat history, PDF session notes, vector DB wrapper
+├── call_llm.py              # Thin wrapper around OpenAI / LLM calls
+├── pdfprocessor.py          # PDF extraction utilities
 ├── queryreformulator.py     # Query reformulation heuristics
 ├── toolselector.py          # Maps queries -> ToolType(s)
-├── call_llm.py              # Thin wrapper around OpenAI / LLM calls
+├── mcptools.py              # Tool implementations (RAG, math, tavily, wiki, planner, etc.)
+├── quizmaster.py            # Quiz generation + interactive quiz runner
+├── summarizer.py            # session/past summarizer used in graph
 ├── self_evaluator.py        # Confidence scoring and self-correction routines
-├── pdfprocessor.py          # PDF extraction utilities
+├── searchtools.py           # Searching tool like wikipedia or Tavilly for searching from external knowledge base
 ├── utils.py                 # prompt styles, helper functions
 ├── README.md                # This file
 ├── requirements.txt
+├── chat_history.py          # Manages and stores past conversation history
+├── long_term_notes.py       # Stores long-term notes
+├── chroma_db                # Local vector database for storing and retrieving embeddings
+├── long_term_notes.py       # Stores and retrieves long-term notes for RAG
 └── examples/                # example PDFs, sample sessions, demo scripts
 ```
 
@@ -79,7 +84,7 @@ TAVILY_API_KEY=...
 
 4. Run the CLI:
 ```bash
-python studybuddy.py
+python main.py
 ```
 
 ---
@@ -173,15 +178,3 @@ Upload your notes pdf: notes/transformers.pdf
 
 ---
 
-## 🚀 Roadmap for Week 6
-
-- Web UI (FastAPI + React)
-- Spaced repetition in planner
-- Provenance tracking for RAG answers
-- Plugin-style external tool loading
-
----
-
-## 📜 License
-
-MIT — use, adapt, and share with attribution.
