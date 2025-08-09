@@ -7,10 +7,10 @@ class Summarizer:
     def __init__(self, memory_manager: MemoryManager):
         self.memory_manager = memory_manager
     
-    async def summarize_recent_session(self) -> str:
+    def summarize_recent_session(self) -> str:
         """Summarize current session activities"""
 
-        chat_history = self.memory_manager.chat_history[-10:] if len(self.memory_manager.chat_history) > 10 else self.memory_manager.chat_history  # Last 10 messages
+        chat_history = self.memory_manager.chat_history[-10:] if len(self.memory_manager.chat_history) > 10 else self.memory_manager.chat_history
         session_notes = self.memory_manager.session_notes
         
         prompt = f"""
@@ -28,15 +28,16 @@ class Summarizer:
         Keep summary under 200 words.
         """
         messages = [{"role" : "system", "content" : prompt}]
-        return await call_openai(messages)
+        return call_openai(messages)
     
-    async def summarize_past_topics(self) -> str:
+    def summarize_past_topics(self) -> str:
         """Summarize historical learning topics"""
+        
         if not self.memory_manager.long_term_notes:
             return "No previous learning history available."
         
-        notes_history = self.memory_manager.long_term_notes[-20:] if len(self.memory_manager.long_term_notes) > 20 else self.memory_manager.long_term_notes  # Last 20 notes
-        chat_history = self.memory_manager.chat_history[-100:] if len(self.memory_manager.chat_history) > 100 else self.memory_manager.chat_history
+        notes_history = self.memory_manager.long_term_notes[-10:] if len(self.memory_manager.long_term_notes) > 10 else self.memory_manager.long_term_notes 
+        chat_history = self.memory_manager.chat_history[-50:] if len(self.memory_manager.chat_history) > 50 else self.memory_manager.chat_history
 
         prompt = f"""
         Analyze the long-term learning history and provide a summary of:
@@ -53,4 +54,4 @@ class Summarizer:
         Keep summary under 500 words.
         """
         messages = [{"role" : "system", "content" : prompt}]
-        return await call_openai(messages)
+        return call_openai(messages)

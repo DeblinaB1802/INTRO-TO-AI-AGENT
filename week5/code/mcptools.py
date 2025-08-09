@@ -5,6 +5,7 @@ from langchain.prompts import ChatPromptTemplate
 from call_llm import call_openai
 from quizmaster import QuizType, QuizGenerator
 from searchtools import search_tavily, search_wikipedia
+from summarizer import Summarizer
 
 class MCPTools:
     """Implementation of MCP server tools"""
@@ -12,7 +13,8 @@ class MCPTools:
     def __init__(self, memory_manager: MemoryManager):
         self.memory_manager = memory_manager
     
-    async def rag_tool(self, query: str) -> str:
+    
+    def rag_tool(self, query: str, style: str) -> str:
         """RAG tool for information retrieval from provided notes"""
 
         relevant_docs = self.memory_manager.retrieve_relevant_context(query)
@@ -30,31 +32,31 @@ class MCPTools:
         If information is insufficient, clearly state what's missing.
         """
         messages = [{"role" : "system", "content" : prompt}]
-        return await call_openai(messages)
+        return call_openai(messages, style)
     
-    async def tavily(self, query: str) -> str:
+    def tavily(self, query: str, style: str) -> str:
         """Tavily tool for recent information retrieval from external source"""
 
-        response = await search_tavily(query)
+        response = search_tavily(query)
         messages = [
             {"role": "system", "content": f"""You are an AI Study Assistant. Answer the following question ONLY based on the content provided to you. 
             If you can't find the answer in the provided content, state that "I can't find the answer in the provided content." """},
             {"role": "user", "content": f"Notes: {response}\nQuestion: {query}"}
         ]
-        return await call_openai(messages)
+        return call_openai(messages, style)
 
-    async def wiki(self, query: str) -> str:
+    def wiki(self, query: str, style: str) -> str:
         """Wikipedia tool for factual information retrieval from external source"""
 
-        response = await search_wikipedia(query)
+        response = search_wikipedia(query)
         messages = [
             {"role": "system", "content": f"""You are an AI Study Assistant. Answer the following question ONLY based on the content provided to you. 
             If you can't find the answer in the provided content, state that "I can't find the answer in the provided content." """},
             {"role": "user", "content": f"Notes: {response}\nQuestion: {query}"}
             ]
-        return await call_openai(messages)
+        return call_openai(messages, style)
     
-    async def math_solver(self, query: str) -> str:
+    def math_solver(self, query: str, style: str) -> str:
         """
         Use the Plan-Execute-Refine pattern to solve mathematical problems.
         Ensures step-by-step reasoning, correctness, and clarity.
@@ -71,7 +73,7 @@ class MCPTools:
         Do not solve the problem yet.
         """
         plan_messages = [{"role": "system", "content": plan_prompt}]
-        plan = await call_openai(plan_messages)
+        plan = call_openai(plan_messages, style)
 
         # Step 2: EXECUTE
         execute_prompt = f"""
@@ -86,7 +88,7 @@ class MCPTools:
         Now solve the problem in detail.
         """
         execute_messages = [{"role": "system", "content": execute_prompt}]
-        execution = await call_openai(execute_messages)
+        execution = call_openai(execute_messages, style)
 
         # Step 3: REFINE
         refined_prompt = f"""
@@ -105,11 +107,11 @@ class MCPTools:
         Provide the final, corrected, and clearly formatted solution.
         """
         refined_messages = [{"role": "system", "content": refined_prompt}]
-        refined_solution = await call_openai(refined_messages)
+        refined_solution = call_openai(refined_messages, style)
 
         return f" Plan:\n{plan.strip()}\n\n Solution:\n{refined_solution.strip()}"
 
-    async def quiz_generator(self, query: str, session_summary: str, past_summary: str) -> str:
+    def quiz_generator(self, query: str, session_summary: str, past_summary: str) -> str:
         """Generate quiz based on type and content"""
 
         prompt = f"""
@@ -128,16 +130,16 @@ class MCPTools:
         Answer:
         """
         messages = [{"role" : "system", "content" : prompt}]
-        quiz_type = await call_openai(messages)
+        quiz_type = call_openai(messages)
 
         quizmaster = QuizGenerator()
         try:
-            await quizmaster.run_interactive_quiz(query, quiz_type, session_summary, past_summary)
+            quizmaster.run_interactive_quiz(query, quiz_type, session_summary, past_summary)
             return "Quiz is Over."
         except:
             return "Failed to generate your quiz. Please retry."
         
-    async def notes_evaluator(self) -> str:
+    def notes_evaluator(self, style: str) -> str:
         """Evaluate notes and suggest improvements"""
 
         prompt = f"""
@@ -156,9 +158,9 @@ class MCPTools:
         Provide constructive feedback and actionable recommendations.
         """
         messages = [{"user" : "system", "content" : prompt}]
-        return await call_openai(messages)
+        return call_openai(messages, style)
     
-    async def planner(self, query: str, past_summary: str) -> str:
+    def planner(self, query: str, past_summary: str, style: str) -> str:
         """Create detailed study plan"""
         
         prompt = f"""
@@ -227,18 +229,18 @@ class MCPTools:
         """
 
         messages = [{"role" : "user", "content" : prompt}]
-        return await call_openai(messages)
+        return call_openai(messages, style)
     
-    async def fallback_strategy(self, query: str) -> str:
+    def fallback_strategy(self, query: str, style: str) -> str:
         """Generate a fallback response using general LLM knowledge when primary methods fail."""
 
         fallback_prompt = f"""
         You are Study Buddy, a peer tutor. The primary method failed. Answer {query} using general knowledge or suggest an alternative approach.
         """
         fallback_messages = [{"role": "system", "content": fallback_prompt}]
-        return await call_openai(fallback_messages)
+        return call_openai(fallback_messages, style)
     
-    async def follow_up(self, query: str) -> str:
+    def follow_up(self, query: str, style: str) -> str:
         """
         Generate a follow-up response in an ongoing tutoring conversation using general LLM capabilities.
         """
@@ -263,9 +265,9 @@ class MCPTools:
         
         followup_messages = [{"role": "system", "content": followup_prompt}]
         
-        return await call_openai(followup_messages)
+        return call_openai(followup_messages, style)
 
-    async def summarizer(self, query: str, session_summary: str, past_summary: str) -> str:
+    def summarizer(self, query: str, session_summary: str, past_summary: str, style: str) -> str:
         """
         Returns a session summary, past summary, or generates a new one based on the query.
         """
@@ -281,7 +283,7 @@ class MCPTools:
         Respond with only one word: "session", "past", or "other".
         """
         messages = [{"role": "user", "content": prompt}]
-        response = (await call_openai(messages)).strip().lower()
+        response = (call_openai(messages)).strip().lower()
 
         if response == "session":
             return session_summary
@@ -297,6 +299,6 @@ class MCPTools:
             Return only the summary text.
             """
             messages = [{"role": "user", "content": summary_prompt}]
-            return await call_openai(messages)
+            return call_openai(messages, style)
         else:
             return "I'm not sure what you're referring to. Could you clarify your request?"

@@ -21,38 +21,41 @@ class ToolSelector:
     def __init__(self):
         pass
     
-    async def select_tools(self, query: str) -> List[ToolType]:
+    def select_tools(self, query: str) -> List[ToolType]:
         """Select appropriate tools for the given query"""
 
         prompt = f"""
-        Analyze the user query and select the most appropriate tool(s) from the list below. Multiple tools may be selected if needed. If the query is unclear or 
-        lacks required info (e.g. topic, goal, timeframe), include FOLLOW_UP to ask for clarification.
-        Most tool responses should be followed by FOLLOW_UP to guide the conversation naturally. Use FALLBACK only if no tool applies, even after clarification.
+        You are a tool selector that analyzes the user's query and determines the most appropriate tool(s) from the list below. 
 
-        Tools & When to Use
-        "RAG" : For questions about content in user-provided notes or session data.
-        "MATH_SOLVER" : For math problems, formulas, or equations.
-        "TAVILY_SEARCH" : For current events, real-time, or web-based info.
-        "WIKIPEDIA_SEARCH" : For general factual or encyclopedic queries.
-        "SUMMARIZER" : When the user asks to summarize past sessions or notes.
-        "QUIZ_GENERATOR" : For generating quizzes. Use FOLLOW_UP if topic/session is not specified.
-        "NOTES_EVALUATOR" : Only if user explicitly asks to review/improve notes.
-        "PLANNER" : For study plans. If vague (missing goal, subject, time), use with FOLLOW_UP.
-        "FOLLOW_UP" : When query is unclear, missing context, or needs disambiguation. Use with tools when appropriate.
-        "FALLBACK" : Only when no tool applies, even after FOLLOW_UP.
+        Key Guidelines:
+        - include "FOLLOW_UP" along with other tools unless the user interaction experience might enhance with follow up.
+        - If the query involves summarizing, includes terms like "summary", "summarize", "brief", "overview" on a mentioned topic or past topics or sessions, include the "SUMMARIZER" tool.
+        - Use "FALLBACK" only when no tool applies, even after clarification.
 
-        Rules
-        Select multiple tools if needed.
-        If intent is somewhat clear but missing details, pair tool(s) with FOLLOW_UP.
-        Prefer FOLLOW_UP over assuming.
-        Do not guess — ask.
-        
+        Tool Descriptions:
+        - "RAG": Use when the query is about content in user-provided notes or session data.
+        - "MATH_SOLVER": For math-related questions, equations, or formulas.
+        - "TAVILY_SEARCH": For real-time, current events, or web information.
+        - "WIKIPEDIA_SEARCH": For general factual or encyclopedic queries.
+        - "SUMMARIZER": When the query requests summaries, overviews, or briefing about sessions, topics, or notes.
+        - "QUIZ_GENERATOR": When asked to generate quizzes. Include FOLLOW_UP if necessary
+        - "NOTES_EVALUATOR": Only if the user explicitly asks to review or improve notes.
+        - "PLANNER": For study or learning plans. If the query lacks subject, goal, or timeframe, use FOLLOW_UP with it.
+        - "FOLLOW_UP": Include this whenever the query lacks clarity or full context. Use with tools as needed.
+        - "FALLBACK": Use only when no tool applies, even after asking clarifying questions.
+
+        Rules:
+        - Prefer FOLLOW_UP over making assumptions.
+        - Select multiple tools if more than one is applicable.
+        - DO NOT guess the user's intent — request clarification using follow up when in doubt.
+
         Query: {query}
-        
-        Respond with a JSON list of tool names, e.g., ["rag", "math_solver"]
+
+        Respond with a JSON list of lowercase tool names, e.g., ["summarizer", "follow_up"]
         """
+
         messages = [{"role" : "user", "content" : prompt}]
-        response = await call_openai(messages)
+        response = call_openai(messages)
         try:
             tool_names = json.loads(response.strip())
             return [ToolType(name.lower()) for name in tool_names if name.lower() in [t.value for t in ToolType]]

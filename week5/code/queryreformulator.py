@@ -8,7 +8,7 @@ class QueryReformulator:
     def __init__(self, memory_manager: MemoryManager):
         self.memory_manager = memory_manager
     
-    async def should_reformulate(self, query: str) -> bool:
+    def should_reformulate(self, query: str) -> bool:
         """Determine if query needs reformulation"""
 
         prompt = f"""
@@ -21,10 +21,10 @@ class QueryReformulator:
         - "VAGUE" if it needs reformulation with context
         """
         messages = [{"role" : "system", "content" : prompt}]
-        response = await call_openai(messages)
+        response = call_openai(messages)
         return response == "VAGUE"
     
-    async def reformulate_query(self, query: str) -> str:
+    def reformulate_query(self, query: str) -> str:
         """Reformulate vague query with relevant chat history"""
 
         chat_history = self.memory_manager.get_optimized_history()
@@ -38,4 +38,4 @@ class QueryReformulator:
         Provide a clear, specific reformulated query that incorporates relevant context.
         """
         messages = [{"role" : "system", "content" : prompt}]
-        return await call_openai(messages)
+        return call_openai(messages)

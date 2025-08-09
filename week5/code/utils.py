@@ -24,7 +24,9 @@ class PDFProcessor:
                 text = ""
                 for page in pdf_reader.pages:
                     text += page.extract_text() + "\n"
+                print(text)
                 return text.strip()
         except Exception as e:
             logger.error(f"Error extracting PDF: {str(e)}")
             return ""
+        

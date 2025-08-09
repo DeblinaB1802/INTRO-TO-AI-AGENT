@@ -10,7 +10,7 @@ class EthicalGuardrail:
             "dangerous instructions", "personal information extraction"
         ]
     
-    async def check_query_ethics(self, query: str) -> Tuple[bool, Optional[str]]:
+    def check_query_ethics(self, query: str) -> Tuple[bool, Optional[str]]:
         """Check if query passes ethical guidelines"""
 
         prompt = f"""
@@ -29,7 +29,7 @@ class EthicalGuardrail:
         - "REFRAME: [suggestion]" if it needs minor adjustments
         """
         messages = [{"role" : "system", "content" : prompt}]
-        response = await call_openai(messages)
+        response = call_openai(messages)
         result = response.strip()
         
         if result.startswith("PASS"):
@@ -39,7 +39,7 @@ class EthicalGuardrail:
         else:
             return False, result[5:].strip() if result.startswith("FAIL:") else result
     
-    async def check_response_ethics(self, response: str) -> Tuple[bool, str]:
+    def check_response_ethics(self, response: str) -> Tuple[bool, str]:
         """Filter potentially sensitive information from responses"""
         
         prompt = f"""
@@ -57,7 +57,7 @@ class EthicalGuardrail:
         """
         
         messages = [{"role" : "system", "content" : prompt}]
-        response = await call_openai(messages)
+        response = call_openai(messages)
         content = response.strip()
         
         if content.startswith("APPROVED:"):

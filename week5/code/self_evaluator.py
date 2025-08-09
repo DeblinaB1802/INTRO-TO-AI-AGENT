@@ -8,7 +8,7 @@ class ConfidenceEvaluator:
         self.confidence_threshold = 0.7
         self.embed_model = SentenceTransformer("all-MiniLM-L6-v2")
     
-    async def llm_confidence_score(self, query: str, response: str) -> float:
+    def llm_confidence_score(self, query: str, response: str) -> float:
         """Use an LLM to rate the response's quality from 0 to 1 based on relevance and accuracy."""
 
         prompt = f"""Evaluate the response to the following question.
@@ -20,7 +20,7 @@ class ConfidenceEvaluator:
             Respond with just the number.
             """
         messages = [{"role": "system", "content": prompt}]
-        score_str = await call_openai(messages)
+        score_str = call_openai(messages)
         try:
             score = min(max(float(score_str), 0.0), 1.0)
             return score
@@ -43,8 +43,8 @@ class ConfidenceEvaluator:
         scores["overlap"] = round(overlap * 0.2, 3)
 
         # Heuristic 3: Semantic similarity
-        q_embed = self.embed_model.encode(query, convert_to_tensor=True)
-        r_embed = self.embed_model.encode(response, convert_to_tensor=True)
+        q_embed = self.embed_model.encode(query, convert_to_tensor=True, show_progress_bar=False)
+        r_embed = self.embed_model.encode(response, convert_to_tensor=True, show_progress_bar=False)
         sim = util.cos_sim(q_embed, r_embed).item()
         scores["semantic_similarity"] = round(min(sim * 0.3, 0.3), 3)
 
@@ -58,12 +58,12 @@ class ConfidenceEvaluator:
         scores["heuristic_total"] = round(sum(scores.values()), 3)
         return scores
 
-    async def evaluate_confidence(self, query: str, response: str, use_llm: bool = True) -> dict:
+    def evaluate_confidence(self, query: str, response: str, use_llm: bool = True) -> dict:
         """Combine heuristic and LLM scores to compute a final confidence score for the response."""
         scores = self.heuristic_confidence_score(query, response)
         
         if use_llm:
-            llm_score = await self.llm_confidence_score(query, response)
+            llm_score = self.llm_confidence_score(query, response)
             scores["llm_score"] = round(llm_score, 3) if llm_score is not None else "LLM error"
             
             if isinstance(llm_score, float):
@@ -80,10 +80,8 @@ class ConfidenceEvaluator:
 
 class SelfCorrector:
     """Use a LLM to identify error in its own response and self-correct it if found an error"""
-    def __init__(self):
-        self.correction_count = 0
 
-    async def self_correct_response(self, query: str, initial_response: str) -> str:
+    def self_correct_response(self, query: str, initial_response: str, style: str) -> str:
         """Detect and correct errors in a response."""
         
         # Step 1: Detect errors
@@ -94,7 +92,7 @@ class SelfCorrector:
         If errors are found, explain them. If none, say "No errors detected."
         """
         detect_messages = [{"role": "system", "content": detect_prompt}]
-        error_report = await call_openai(detect_messages)
+        error_report = call_openai(detect_messages)
         
         if "no errors detected" in error_report.lower():
             return initial_response
@@ -107,7 +105,6 @@ class SelfCorrector:
         Error Report: {error_report}
         """
         correct_messages = [{"role": "system", "content": correct_prompt}]
-        corrected_response = await call_openai(correct_messages)
-        self.correction_count += 1
+        corrected_response = call_openai(correct_messages, style)
         
         return corrected_response

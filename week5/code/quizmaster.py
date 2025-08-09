@@ -18,7 +18,7 @@ class QuizGenerator:
         self.user_answers = []
         self.scores = []
         
-    async def generate_quiz_questions(self, query: str, quiz_type: QuizType, session_summary: str, past_summary: str) -> List[Dict]:
+    def generate_quiz_questions(self, query: str, quiz_type: QuizType, session_summary: str, past_summary: str) -> List[Dict]:
         """Generate quiz questions based on type and content"""
 
         if quiz_type == QuizType.TOPIC:
@@ -56,8 +56,7 @@ class QuizGenerator:
         """
         
         messages = [{"role": "user", "content": prompt}]
-        response = await call_openai(messages)
-        print(response)
+        response = call_openai(messages)
         
         try:
             cleaned = re.sub(r"^```json|```$", "", response.strip(), flags=re.MULTILINE).strip()
@@ -86,7 +85,7 @@ class QuizGenerator:
             }
         ]
     
-    async def evaluate_answer(self, question: Dict, user_answer: str) -> Dict:
+    def evaluate_answer(self, question: Dict, user_answer: str) -> Dict:
         """Evaluate user's answer using LLM"""
 
         prompt = f"""
@@ -110,8 +109,7 @@ class QuizGenerator:
         """
         
         messages = [{"role": "user", "content": prompt}]
-        response = await call_openai(messages)
-        print(response)
+        response = call_openai(messages)
         
         # Parse score from response
         try:
@@ -127,7 +125,7 @@ class QuizGenerator:
             "feedback": feedback
         }
     
-    async def run_interactive_quiz(self, query: str, quiz_type: QuizType, session_summary: str, past_summary: str):
+    def run_interactive_quiz(self, query: str, quiz_type: QuizType, session_summary: str, past_summary: str):
         """Run the complete interactive quiz"""
 
         print(f"\n Starting Quiz: {query}")
@@ -135,7 +133,7 @@ class QuizGenerator:
         
         # Generate questions
         print("📝 Generating quiz questions...")
-        self.current_quiz = await self.generate_quiz_questions(query, quiz_type, session_summary, past_summary)
+        self.current_quiz = self.generate_quiz_questions(query, quiz_type, session_summary, past_summary)
         
         if not self.current_quiz:
             print("❌ Failed to generate quiz questions. Please try again.")
@@ -166,13 +164,14 @@ class QuizGenerator:
             print("\n🤔 Evaluating your answer...")
             
             # Evaluate answer
-            evaluation = await self.evaluate_answer(question, user_answer)
+            evaluation = self.evaluate_answer(question, user_answer)
             self.user_answers.append(user_answer)
             self.scores.append(evaluation['score'])
             
             # Show feedback
             print("\n📊 EVALUATION:")
-            print(evaluation['feedback'])
+            print(f"Score: {evaluation['score']}")
+            print(f"Feedback: {evaluation['feedback']}")
             print("\n" + "="*50)
             
             # Ask if user wants to continue
@@ -183,9 +182,9 @@ class QuizGenerator:
                     break
         
         # Show final results
-        await self._show_final_results()
+        self._show_final_results()
     
-    async def _show_final_results(self):
+    def _show_final_results(self):
         """Display final quiz results and overall feedback"""
 
         if not self.scores:
@@ -217,10 +216,10 @@ class QuizGenerator:
         
         # Generate overall feedback
         print("\n🎯 OVERALL FEEDBACK:")
-        await self._generate_overall_feedback(percentage, easy_scores, medium_scores, hard_scores)
+        self._generate_overall_feedback(percentage, easy_scores, medium_scores, hard_scores)
         print("="*60)
     
-    async def _generate_overall_feedback(self, percentage: float, easy_scores: List, medium_scores: List, hard_scores: List):
+    def _generate_overall_feedback(self, percentage: float, easy_scores: List, medium_scores: List, hard_scores: List):
         """Generate overall performance feedback using LLM"""
         feedback_prompt = f"""
         Provide encouraging and constructive overall feedback for a student who completed a quiz with:
@@ -239,6 +238,6 @@ class QuizGenerator:
         """
         
         messages = [{"role": "user", "content": feedback_prompt}]
-        feedback = await call_openai(messages)
+        feedback = call_openai(messages)
         print(feedback)
 

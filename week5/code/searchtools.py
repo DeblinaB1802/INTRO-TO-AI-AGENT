@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 tavily_api_key = os.getenv("TAVILY_API_KEY")
 
-async def search_tavily(query: str, api_key: str = tavily_api_key, timeout: int = 10) -> str:
+def search_tavily(query: str, api_key: str = tavily_api_key, timeout: int = 10) -> str:
     """
     Perform a search using the Tavily API and return a concise answer.
     """
@@ -62,7 +62,7 @@ async def search_tavily(query: str, api_key: str = tavily_api_key, timeout: int 
         logging.exception(f"Unexpected error during Tavily search: {e}")
         return "Search failed."
 
-async def search_wikipedia(query: str) -> str:
+def search_wikipedia(query: str) -> str:
     """Search Wikipedia and return a 10-sentence summary or an error message."""
 
     try:
